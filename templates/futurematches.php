@@ -10,23 +10,36 @@
 		<div class="container">
 			<?php 
 			if (array_key_exists("EU", $futureMatches)) {
+				$checkIfDateIsTheSame = "";
 				foreach ($futureMatches["EU"] as $match) {
+					$date = dateFr($match["date"]);
+					if ($date !== $checkIfDateIsTheSame) {
+						$div = "<h4 class='eu'>".$date."</h4>";
+						echo $div;
+						$checkIfDateIsTheSame = $date;
+					}
 			?>
 			<div class="row">
 				<div class="container-fluid">
 					<div class="popup eu">
 					<?php 
-						$date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
+						// var_dump($date);
+						$hour = timeOfDateFr($match["date"]);
+						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
 						$teams = [];
 						if (count($match["opponents"]) == 1) {
 							$teams[] = [$match["opponents"][0]->opponent->acronym];
+							$teams[] = ["TBD"];
+						} elseif (count($match["opponents"]) < 1) {
+							$teams[] = ["TBD"];
 							$teams[] = ["TBD"];
 						} else {
 							foreach ($match["opponents"] as $team) {
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
-						echo "<p>".$date->format('d-m H:i')." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						// if($div){echo($div);};
+						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";
 						echo $match["name"];
@@ -45,23 +58,36 @@
 			?>
 			<?php 
 			if (array_key_exists("NA", $futureMatches)) {
+				$checkIfDateIsTheSame = "";
 				foreach ($futureMatches["NA"] as $match) {
+					$date = dateFr($match["date"]);
+					if ($date !== $checkIfDateIsTheSame) {
+						$div = "<h4 class='na'>".$date."</h4>";
+						echo $div;
+						$checkIfDateIsTheSame = $date;
+					}
 			?>
 			<div class="row">
 				<div class="container-fluid">
 					<div class="popup na">
 					<?php 
-						$date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
+						// var_dump($date);
+						$hour = timeOfDateFr($match["date"]);
+						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
 						$teams = [];
 						if (count($match["opponents"]) == 1) {
 							$teams[] = [$match["opponents"][0]->opponent->acronym];
 							$teams[] = ["TBD"];
-						} else {
+						} elseif(count($match["opponents"]) < 1) {
+							$teams[] = ["TBD"];
+							$teams[] = ["TBD"]; 
+						}	else {
 							foreach ($match["opponents"] as $team) {
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
-						echo "<p>".$date->format('d-m H:i')." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						// if($div){echo($div);};
+						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";
 						echo $match["name"];
@@ -80,13 +106,22 @@
 			?>
 			<?php 
 			if (array_key_exists("LCK", $futureMatches)) {
+				$checkIfDateIsTheSame = "";
 				foreach ($futureMatches["LCK"] as $match) {
+					$date = dateFr($match["date"]);
+					if ($date !== $checkIfDateIsTheSame) {
+						$div = "<h4 class='lck'>".$date."</h4>";
+						echo $div;
+						$checkIfDateIsTheSame = $date;
+					}
 			?>
 			<div class="row">
 				<div class="container-fluid">
 					<div class="popup lck">
 					<?php 
-						$date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
+						// var_dump($date);
+						$hour = timeOfDateFr($match["date"]);
+						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
 						$teams = [];
 						if (count($match["opponents"]) == 1) {
 							$teams[] = [$match["opponents"][0]->opponent->acronym];
@@ -96,7 +131,8 @@
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
-						echo "<p>".$date->format('d-m H:i')." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						// if($div){echo($div);};
+						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";
 						echo $match["name"];
@@ -115,13 +151,22 @@
 			?>
 			<?php 
 			if (array_key_exists("LPL", $futureMatches)) {
+				$checkIfDateIsTheSame = "";
 				foreach ($futureMatches["LPL"] as $match) {
+					$date = dateFr($match["date"]);
+					if ($date !== $checkIfDateIsTheSame) {
+						$div = "<h4 class='lpl'>".$date."</h4>";
+						echo $div;
+						$checkIfDateIsTheSame = $date;
+					}
 			?>
 			<div class="row">
 				<div class="container-fluid">
 					<div class="popup lpl">
 					<?php 
-						$date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
+						// var_dump($date);
+						$hour = timeOfDateFr($match["date"]);
+						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
 						$teams = [];
 						if (count($match["opponents"]) == 1) {
 							$teams[] = [$match["opponents"][0]->opponent->acronym];
@@ -131,7 +176,8 @@
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
-						echo "<p>".$date->format('d-m H:i')." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						// if($div){echo($div);};
+						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";
 						echo $match["name"];

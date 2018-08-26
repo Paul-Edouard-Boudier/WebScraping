@@ -9,7 +9,7 @@
 	<div class="container-fluid">
 			<div class="row">
 					<div id="file-loader" data-file="csgo" class="col-lg-8">
-					<?php require_once("csgo.php") ?>
+						CONTENT HERE
 					<!-- <?php require_once("lol.php") ?>
 					<?php require_once("programming.php") ?> -->
 					test

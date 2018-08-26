@@ -9,6 +9,15 @@
     return $data;   // Returning the data from the function
   }
 
+  function dateFr($datetime) {
+		setlocale(LC_ALL, 'fr_FR');
+		return strftime('%d %B %Y', strtotime($datetime));
+	}
+	function timeOfDateFr($datetime) {
+		setlocale(LC_ALL, 'fr_FR');
+		return strftime('%Hh%M', strtotime($datetime));	
+	}
+
   class RedditPost {
   	public $title;
   	public $content;
