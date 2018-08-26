@@ -1,0 +1,188 @@
+/* /!\ -------- SUMMARY -------- /!\ */
+/* -------- REDDIT RELATED CLASSES -------- */
+/* -------- CSGO RELATED CLASSES -------- */
+/* -------- LOL RELATED CLASSES -------- */
+.test {
+	background-color: red;
+}
+.right-side-navbar {
+	background-color: grey;
+}
+.container-full {
+	width: 100%;
+}
+
+
+
+a.link_hltv:hover {
+	text-decoration: none;
+	background-color: #e5e7ea;
+}
+
+
+a.link_csgo_reddit {
+	text-decoration: none;
+	color: grey;
+	display: block;
+}
+a.link_csgo_reddit:hover {
+	text-decoration: none;
+	/*border: 1px solid black;*/
+}
+.no-padding-margin {
+	padding: 0;
+	margin: 0;
+}
+/*.container {
+	padding: 0 !important;
+	margin: 0 !important;
+}*/
+
+/* -------- REDDIT RELATED CLASSES -------- */
+
+
+.reddit_title {
+  color: black;
+  font-weight: 380;
+  font-size: x-large;
+}
+.reddit_upvotes {
+	color: black;
+}
+
+
+/* -------- END REDDIT RELATED CLASSES -------- */
+
+/* -------- CSGO RELATED CLASSES -------- */
+.csgo-related {
+	/*background-color: black;*/
+}
+.relative-container {
+	position: relative;
+}
+
+.logo_hltv {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-image: url("../images/hltv_logo.png");
+	background-size: cover;
+	height: 70px;
+	width: 133.33px;
+}
+
+.logo_reddit_csgo {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-image: url('../images/reddit_csgo.png');
+	background-size: cover;
+	height: 40px;
+	width: 70px;
+}
+
+.all_news_hltv {
+	width: 650px;
+	margin-bottom: 40px;
+}
+
+.country_hltv {
+	margin: auto;
+}
+.title_hltv {
+	margin: auto;
+}
+.link_hltv {
+	text-decoration: none;
+	border: 1px solid #e5e7ea;
+	empty-cells: hide;
+	height: 50px;
+}
+.time_hltv {
+	color: black;
+	opacity: 0.5;	
+	font-size: small;
+}
+
+.comments_hltv {
+	color: black;
+	opacity: 0.9;
+	font-size: 15px;
+}
+
+.box-reddit {
+	width: 100%;
+	overflow-y: auto;
+	height: 450px;
+}
+
+.post_csgo {
+	/*width: 650px;*/
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 2px;
+	margin-bottom: 15px;
+}
+.post_csgo:hover {
+	border: 1px solid black;
+}
+/* -------- END CSGO RELATED CLASSES -------- */
+/*--------------------------------------------*/
+/* -------- LOL RELATED CLASSES -------- */
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    /*visibility: hidden;*/
+    display: none;
+    width: 160px;
+    background-color: #6d7272;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    /*visibility: visible;*/
+    display: contents;
+    /*-webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s*/
+}
+.active {
+	color: blue;
+}
+.league:hover {
+	cursor: pointer;
+}
+.na, .lck, .lpl {
+	display: none;
+}
+/*.lck {
+	display: none;
+}*/
+/* -------- END LOL RELATED CLASSES -------- */
+/*-------------------------------------------*/
