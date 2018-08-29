@@ -7,25 +7,24 @@
 		<div class="col-3 league" data-league="lck"><p>LCK</p></div>
 		<div class="col-3 league" data-league="lpl"><p>LPL</p></div>
 	</div>
-		<div class="container">
-			<?php 
-			if (array_key_exists("EU", $futureMatches)) {
+	<div class="container">
+		<?php 
+			foreach ($futureMatchesForEveryLeague as $key => $futureMatchesByLeague) {
 				$checkIfDateIsTheSame = "";
-				foreach ($futureMatches["EU"] as $match) {
+				foreach ($futureMatchesByLeague as $match) {
+					// var_dump($match);
 					$date = dateFr($match["date"]);
 					if ($date !== $checkIfDateIsTheSame) {
-						$div = "<h4 class='eu'>".$date."</h4>";
+						$div = "<div class='date ".strtolower($key)."'><h4 style='margin-bottom: 0px;'>".$date."</h4></div>";
 						echo $div;
 						$checkIfDateIsTheSame = $date;
 					}
-			?>
-			<div class="row">
+		?>
+				<div class="row">
 				<div class="container-fluid">
-					<div class="popup eu">
+					<div class="popup <?= strtolower($key)?>" >
 					<?php 
-						// var_dump($date);
 						$hour = timeOfDateFr($match["date"]);
-						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
 						$teams = [];
 						if (count($match["opponents"]) == 1) {
 							$teams[] = [$match["opponents"][0]->opponent->acronym];
@@ -38,161 +37,40 @@
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
-						// if($div){echo($div);};
-						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
-						echo "<span class='popuptext'>";
-						echo $match["league_name"]." ".$match["season"]." ";
-						echo $match["name"];
-						echo "<br>";
-						echo $match["match_type"]." ";
-						echo $match["number_of_games"];
-						// echo $date->format('d-m H:i');
-						echo "</span>";
-					?>
-					</div>
-				</div>
-			</div>
-			<?php 
-				}
-			}
-			?>
-			<?php 
-			if (array_key_exists("NA", $futureMatches)) {
-				$checkIfDateIsTheSame = "";
-				foreach ($futureMatches["NA"] as $match) {
-					$date = dateFr($match["date"]);
-					if ($date !== $checkIfDateIsTheSame) {
-						$div = "<h4 class='na'>".$date."</h4>";
-						echo $div;
-						$checkIfDateIsTheSame = $date;
-					}
-			?>
-			<div class="row">
-				<div class="container-fluid">
-					<div class="popup na">
-					<?php 
-						// var_dump($date);
-						$hour = timeOfDateFr($match["date"]);
-						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
-						$teams = [];
-						if (count($match["opponents"]) == 1) {
-							$teams[] = [$match["opponents"][0]->opponent->acronym];
-							$teams[] = ["TBD"];
-						} elseif(count($match["opponents"]) < 1) {
-							$teams[] = ["TBD"];
-							$teams[] = ["TBD"]; 
-						}	else {
-							foreach ($match["opponents"] as $team) {
-								$teams[] = [$team->opponent->acronym];
-							}
-						}
-						// if($div){echo($div);};
-						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
-						echo "<span class='popuptext'>";
-						echo $match["league_name"]." ".$match["season"]." ";
-						echo $match["name"];
-						echo "<br>";
-						echo $match["match_type"]." ";
-						echo $match["number_of_games"];
-						// echo $date->format('d-m H:i');
-						echo "</span>";
-					?>
-					</div>
-				</div>
-			</div>
-			<?php 
-				}
-			}
-			?>
-			<?php 
-			if (array_key_exists("LCK", $futureMatches)) {
-				$checkIfDateIsTheSame = "";
-				foreach ($futureMatches["LCK"] as $match) {
-					$date = dateFr($match["date"]);
-					if ($date !== $checkIfDateIsTheSame) {
-						$div = "<h4 class='lck'>".$date."</h4>";
-						echo $div;
-						$checkIfDateIsTheSame = $date;
-					}
-			?>
-			<div class="row">
-				<div class="container-fluid">
-					<div class="popup lck">
-					<?php 
-						// var_dump($date);
-						$hour = timeOfDateFr($match["date"]);
-						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
-						$teams = [];
-						if (count($match["opponents"]) == 1) {
-							$teams[] = [$match["opponents"][0]->opponent->acronym];
-							$teams[] = ["TBD"];
+						// echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						echo "<div class='match'>";
+						echo "<div class='time'><p>".$hour."</p></div>";
+						echo "<div class='blue-team'><p>".$teams[0][0]."</p></div>";
+						if (isset($match["opponents"][0])) {
+							echo "<div class='team-logo'><img src=".$match["opponents"][0]->opponent->image_url."></div>";
 						} else {
-							foreach ($match["opponents"] as $team) {
-								$teams[] = [$team->opponent->acronym];
-							}
+							echo "<div class='team-logo'></div>";
 						}
-						// if($div){echo($div);};
-						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
-						echo "<span class='popuptext'>";
-						echo $match["league_name"]." ".$match["season"]." ";
-						echo $match["name"];
-						echo "<br>";
-						echo $match["match_type"]." ";
-						echo $match["number_of_games"];
-						// echo $date->format('d-m H:i');
-						echo "</span>";
-					?>
-					</div>
-				</div>
-			</div>
-			<?php 
-				}
-			}
-			?>
-			<?php 
-			if (array_key_exists("LPL", $futureMatches)) {
-				$checkIfDateIsTheSame = "";
-				foreach ($futureMatches["LPL"] as $match) {
-					$date = dateFr($match["date"]);
-					if ($date !== $checkIfDateIsTheSame) {
-						$div = "<h4 class='lpl'>".$date."</h4>";
-						echo $div;
-						$checkIfDateIsTheSame = $date;
-					}
-			?>
-			<div class="row">
-				<div class="container-fluid">
-					<div class="popup lpl">
-					<?php 
-						// var_dump($date);
-						$hour = timeOfDateFr($match["date"]);
-						// $date = new DateTime($match["date"], new DateTimeZone('Europe/Paris'));
-						$teams = [];
-						if (count($match["opponents"]) == 1) {
-							$teams[] = [$match["opponents"][0]->opponent->acronym];
-							$teams[] = ["TBD"];
+						// echo "<div class='blue-team-logo'><img src=".$match["opponents"][0]->opponent->image_url."></div>";
+						echo "<div class='vs'><p> VS </p></div>";
+						if (isset($match["opponents"][1])) {
+							echo "<div class='team-logo'><img src=".$match["opponents"][1]->opponent->image_url."></div>";
 						} else {
-							foreach ($match["opponents"] as $team) {
-								$teams[] = [$team->opponent->acronym];
-							}
+							echo "<div class='team-logo'></div>";
 						}
-						// if($div){echo($div);};
-						echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
+						// echo "<div class='blue-team-logo'><img src=".$match["opponents"][1]->opponent->image_url."></div>";
+						echo "<div class='red-team'><p>".$teams[1][0]."</p></div>";
+						echo "</div>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";
 						echo $match["name"];
 						echo "<br>";
 						echo $match["match_type"]." ";
 						echo $match["number_of_games"];
-						// echo $date->format('d-m H:i');
 						echo "</span>";
+
 					?>
 					</div>
 				</div>
 			</div>
-			<?php 
+		<?php 
 				}
-			}
-			?>
+			} 
+		?>
 	</div>
 </div>

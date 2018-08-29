@@ -149,7 +149,7 @@
 	
 
 	$lolMatches = json_decode(curl("https://api.pandascore.co//lol/matches/upcoming?token=gGJTiqJPMZseaqMQ1YoeuHYVs0Pdhw-ZWucaaQcjvQgugIcKEok"));
-	$futureMatches = [];
+	$futureMatchesForEveryLeague = [];
 
 	// league name:  "NA LCS"  "LPL China" "EU LCS" "LCK - Champions Korea"
 	// $name = "semi final blabla"
@@ -162,43 +162,42 @@
 	// $serie->full_name = "Summer 2018"
 
 	$x = 0;
-	$futurMatches = [];
 	foreach ($lolMatches as $match) {
 		if ($match->league->name == "EU LCS") {
-			$futureMatches["EU"][$x]["league_name"] = $match->league->name;
-			$futureMatches["EU"][$x]["season"] = $match->serie->full_name;
-			$futureMatches["EU"][$x]["name"] = $match->name;
-			$futureMatches["EU"][$x]["date"] = $match->begin_at;
-			$futureMatches["EU"][$x]["opponents"] = $match->opponents;
-			$futureMatches["EU"][$x]["match_type"] = $match->match_type;
-			$futureMatches["EU"][$x]["number_of_games"] = $match->number_of_games;
+			$futureMatchesForEveryLeague["EU"][$x]["league_name"] = $match->league->name;
+			$futureMatchesForEveryLeague["EU"][$x]["season"] = $match->serie->full_name;
+			$futureMatchesForEveryLeague["EU"][$x]["name"] = $match->name;
+			$futureMatchesForEveryLeague["EU"][$x]["date"] = $match->begin_at;
+			$futureMatchesForEveryLeague["EU"][$x]["opponents"] = $match->opponents;
+			$futureMatchesForEveryLeague["EU"][$x]["match_type"] = $match->match_type;
+			$futureMatchesForEveryLeague["EU"][$x]["number_of_games"] = $match->number_of_games;
 			$x += 1;
 		} else if ($match->league->name == "NA LCS") {
-			$futureMatches["NA"][$x]["league_name"] = $match->league->name;
-			$futureMatches["NA"][$x]["season"] = $match->serie->full_name;
-			$futureMatches["NA"][$x]["name"] = $match->name;
-			$futureMatches["NA"][$x]["date"] = $match->begin_at;
-			$futureMatches["NA"][$x]["opponents"] = $match->opponents;
-			$futureMatches["NA"][$x]["match_type"] = $match->match_type;
-			$futureMatches["NA"][$x]["number_of_games"] = $match->number_of_games;
+			$futureMatchesForEveryLeague["NA"][$x]["league_name"] = $match->league->name;
+			$futureMatchesForEveryLeague["NA"][$x]["season"] = $match->serie->full_name;
+			$futureMatchesForEveryLeague["NA"][$x]["name"] = $match->name;
+			$futureMatchesForEveryLeague["NA"][$x]["date"] = $match->begin_at;
+			$futureMatchesForEveryLeague["NA"][$x]["opponents"] = $match->opponents;
+			$futureMatchesForEveryLeague["NA"][$x]["match_type"] = $match->match_type;
+			$futureMatchesForEveryLeague["NA"][$x]["number_of_games"] = $match->number_of_games;
 			$x += 1;
 		} else if ($match->league->name == "LCK - Champions Korea") {
-			$futureMatches["LCK"][$x]["league_name"] = $match->league->name;
-			$futureMatches["LCK"][$x]["season"] = $match->serie->full_name;
-			$futureMatches["LCK"][$x]["name"] = $match->name;
-			$futureMatches["LCK"][$x]["date"] = $match->begin_at;
-			$futureMatches["LCK"][$x]["opponents"] = $match->opponents;
-			$futureMatches["LCK"][$x]["match_type"] = $match->match_type;
-			$futureMatches["LCK"][$x]["number_of_games"] = $match->number_of_games;
+			$futureMatchesForEveryLeague["LCK"][$x]["league_name"] = $match->league->name;
+			$futureMatchesForEveryLeague["LCK"][$x]["season"] = $match->serie->full_name;
+			$futureMatchesForEveryLeague["LCK"][$x]["name"] = $match->name;
+			$futureMatchesForEveryLeague["LCK"][$x]["date"] = $match->begin_at;
+			$futureMatchesForEveryLeague["LCK"][$x]["opponents"] = $match->opponents;
+			$futureMatchesForEveryLeague["LCK"][$x]["match_type"] = $match->match_type;
+			$futureMatchesForEveryLeague["LCK"][$x]["number_of_games"] = $match->number_of_games;
 			$x += 1;
 		} else if ($match->league->name == "LPL China") {
-			$futureMatches["LPL"][$x]["league_name"] = $match->league->name;
-			$futureMatches["LPL"][$x]["season"] = $match->serie->full_name;
-			$futureMatches["LPL"][$x]["name"] = $match->name;
-			$futureMatches["LPL"][$x]["date"] = $match->begin_at;
-			$futureMatches["LPL"][$x]["opponents"] = $match->opponents;
-			$futureMatches["LPL"][$x]["match_type"] = $match->match_type;
-			$futureMatches["LPL"][$x]["number_of_games"] = $match->number_of_games;
+			$futureMatchesForEveryLeague["LPL"][$x]["league_name"] = $match->league->name;
+			$futureMatchesForEveryLeague["LPL"][$x]["season"] = $match->serie->full_name;
+			$futureMatchesForEveryLeague["LPL"][$x]["name"] = $match->name;
+			$futureMatchesForEveryLeague["LPL"][$x]["date"] = $match->begin_at;
+			$futureMatchesForEveryLeague["LPL"][$x]["opponents"] = $match->opponents;
+			$futureMatchesForEveryLeague["LPL"][$x]["match_type"] = $match->match_type;
+			$futureMatchesForEveryLeague["LPL"][$x]["number_of_games"] = $match->number_of_games;
 			$x += 1;
 		}
 	}
