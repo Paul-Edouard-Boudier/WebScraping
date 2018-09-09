@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row" data-leagues="leagues">
-		<div class="col-3 league" data-league="eu">
+		<div class="col-3 league active" data-league="eu">
 			<p>EU LCS</p>
 			</div>
 		<div class="col-3 league" data-league="na"><p>NA LCS</p></div>
@@ -37,17 +37,23 @@
 								$teams[] = [$team->opponent->acronym];
 							}
 						}
+
 						// echo "<p>".$hour." ".$teams[0][0]." vs ".$teams[1][0]."</p>";
 						echo "<div class='match'>";
 						echo "<div class='time'><p>".$hour."</p></div>";
+						// echo "<div class='clash'>";
+						// echo "<div class='blue-team'>";
 						echo "<div class='blue-team'><p>".$teams[0][0]."</p></div>";
 						if (isset($match["opponents"][0])) {
 							echo "<div class='team-logo'><img src=".$match["opponents"][0]->opponent->image_url."></div>";
 						} else {
 							echo "<div class='team-logo'></div>";
 						}
+						// END of BLUE-TEAM
+						// echo "</div>";
 						// echo "<div class='blue-team-logo'><img src=".$match["opponents"][0]->opponent->image_url."></div>";
 						echo "<div class='vs'><p> VS </p></div>";
+						// echo "<div class='red-team'>";
 						if (isset($match["opponents"][1])) {
 							echo "<div class='team-logo'><img src=".$match["opponents"][1]->opponent->image_url."></div>";
 						} else {
@@ -55,6 +61,11 @@
 						}
 						// echo "<div class='blue-team-logo'><img src=".$match["opponents"][1]->opponent->image_url."></div>";
 						echo "<div class='red-team'><p>".$teams[1][0]."</p></div>";
+						// END of RED-TEAM
+						// echo "</div>";
+						// END of CLASH DIV
+						// echo "</div>";
+						// END of MATCH DIV
 						echo "</div>";
 						echo "<span class='popuptext'>";
 						echo $match["league_name"]." ".$match["season"]." ";

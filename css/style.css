@@ -6,7 +6,7 @@
 	background-color: red;
 }
 .right-side-navbar {
-	background-color: #101010;
+	background-color: #1a1a1a;
 	color: white;
 }
 .container-full {
@@ -150,7 +150,7 @@ a.link_csgo_reddit:hover {
     padding: 8px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: 100%;
     left: 50%;
     margin-left: -80px;
 }
@@ -184,17 +184,20 @@ a.link_csgo_reddit:hover {
 	display: none;
 }
 .date {
-	background-color: white;
-	color: black;
+	/*background-color: white;*/
+	color: #c2c2c2;
+	border-bottom: 5px solid #c2c2c2;
 }
 .match {
 	display: flex;
 	height: 120px;
 	width: 100%;
-	/*justify-content: center;*/
 	align-items: center;
+	/*border-bottom: 1px solid white;*/
 
 }
+
+.match+.match { border-bottom: : 1px solid white }
 
 .time {
 	background-color: #000000;
@@ -212,6 +215,13 @@ a.link_csgo_reddit:hover {
 .team-logo img {
 	/*max-height: 50%;*/
 	width: 70%;
+}
+
+.blue-team, .red-team {
+	/*width: 100%;*/
+}
+.clash {
+	width: 100%;
 }
 /*.lck {
 	display: none;
