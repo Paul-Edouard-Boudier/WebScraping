@@ -2,9 +2,11 @@
 /* -------- REDDIT RELATED CLASSES -------- */
 /* -------- CSGO RELATED CLASSES -------- */
 /* -------- LOL RELATED CLASSES -------- */
-.test {
-	background-color: red;
+body {
+	background-color: #e5e7ea !important;
 }
+
+
 .right-side-navbar {
 	background-color: #1a1a1a;
 	color: white;
@@ -12,6 +14,10 @@
 .container-full {
 	width: 100%;
 }
+
+/*.body {
+	background-color: #ebf819;
+}*/
 
 
 
@@ -21,12 +27,12 @@ a.link_hltv:hover {
 }
 
 
-a.link_csgo_reddit {
+a.link_csgo_reddit, a.link_lol_reddit, a.link_programming_reddit {
 	text-decoration: none;
 	color: grey;
 	display: block;
 }
-a.link_csgo_reddit:hover {
+a.link_csgo_reddit:hover, a.link_lol_reddit:hover, a.link_programming_reddit {
 	text-decoration: none;
 	/*border: 1px solid black;*/
 }
@@ -51,6 +57,40 @@ a.link_csgo_reddit:hover {
 	color: black;
 }
 
+.logo_reddit_csgo, .logo_reddit_lol, .logo_reddit_programming {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	/*background-image: url('../images/reddit_csgo.png');*/
+	background-size: cover;
+	height: 50px;
+	width: 70px;
+}
+
+.logo_reddit_csgo {
+	background-image: url('../images/reddit_csgo.png');
+}
+.logo_reddit_lol {
+	background-image: url('../images/reddit_lol.png');
+}
+
+.box-reddit {
+	width: 100%;
+	overflow-y: auto;
+	height: 450px;
+}
+
+.post_csgo, .post_lol, .post_programming {
+	/*width: 650px;*/
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 2px;
+	margin-bottom: 15px;
+}
+.post_csgo:hover, .post_lol:hover, .post_programming:hover {
+	border: 1px solid black;
+}
+
 
 /* -------- END REDDIT RELATED CLASSES -------- */
 
@@ -72,19 +112,10 @@ a.link_csgo_reddit:hover {
 	width: 133.33px;
 }
 
-.logo_reddit_csgo {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	background-image: url('../images/reddit_csgo.png');
-	background-size: cover;
-	height: 40px;
-	width: 70px;
-}
-
 .all_news_hltv {
 	width: 650px;
 	margin-bottom: 40px;
+	background-color: white;
 }
 
 .country_hltv {
@@ -111,22 +142,7 @@ a.link_csgo_reddit:hover {
 	font-size: 15px;
 }
 
-.box-reddit {
-	width: 100%;
-	overflow-y: auto;
-	height: 450px;
-}
 
-.post_csgo {
-	/*width: 650px;*/
-	border: 1px solid gray;
-	border-radius: 5px;
-	padding: 2px;
-	margin-bottom: 15px;
-}
-.post_csgo:hover {
-	border: 1px solid black;
-}
 /* -------- END CSGO RELATED CLASSES -------- */
 /*--------------------------------------------*/
 /* -------- LOL RELATED CLASSES -------- */

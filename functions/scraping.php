@@ -90,15 +90,15 @@
 	
 	// ---------------------
 	
-	// /!\ REDDIT CSGO SITE /!\ //
+	// ------ ! REDDIT CSGO SITE ! ------ //
 
 	$redditCsgo = curl("https://www.reddit.com/r/GlobalOffensive/.json");
 
 	$jsonRedditCsgo = json_decode($redditCsgo);
 	$arrayCsgoPost = $jsonRedditCsgo->data->children;
-	$arrayCsgoPostSliced = array_slice($arrayCsgoPost, 0, 6);
+	$arrayCsgoPostSliced = array_slice($arrayCsgoPost, 0, 8);
 
-	// array of final posts, the one i chose to keep, so the first 6.
+	// array of final posts, the one i chose to keep, so the first 8.
 	$csgoRedditPost = [];
 
 	foreach ($arrayCsgoPostSliced as $rawPost) {
@@ -138,7 +138,7 @@
 	$GLOBALS['csgoRedditPost'] = $csgoRedditPost;
 
 
-	// /!\ END REDDIT CSGO SITE /!\ //
+	// ------ ! END REDDIT CSGO SITE ! ------ //
 	
 	
 	// -------------------------------------
@@ -147,7 +147,7 @@
 
 	// /!\ LOL NEWS RELATED /!\
 	
-
+		// ------ ! FUTUR MATCHES ! ------ //
 	$lolMatches = json_decode(curl("https://api.pandascore.co//lol/matches/upcoming?token=gGJTiqJPMZseaqMQ1YoeuHYVs0Pdhw-ZWucaaQcjvQgugIcKEok"));
 	$futureMatchesForEveryLeague = [];
 
@@ -201,15 +201,95 @@
 			$x += 1;
 		}
 	}
+
+		// ------ ! FUTUR MATCHES ! ------ //
+		
+		// ------ ! REDDIT LOL SITE ! ------ //
+		
+	$redditLol = curl("https://www.reddit.com/r/leagueoflegends/.json");
+
+	$jsonRedditLol = json_decode($redditLol);
+	$arrayLolPost = $jsonRedditLol->data->children;
+	$arrayLolPostSliced = array_slice($arrayLolPost, 0, 8);
+
+	// array of final posts, the one i chose to keep, so the first 8.
+	$lolRedditPost = [];
+
+	foreach ($arrayLolPostSliced as $rawPost) {
+		$post = new RedditPost();
+
+		$post->title = $rawPost->data->title;
+		$post->content = $rawPost->data->selftext;
+		$post->permalink = "https://www.reddit.com/".$rawPost->data->permalink;
+		$post->linkOfPost = $rawPost->data->url;
+		$post->author = $rawPost->data->author;
+		$post->authorText = $rawPost->data->author_flair_text;
+		$post->comments = $rawPost->data->num_comments;
+		$post->upvotes = $rawPost->data->ups;
+		if (!empty((array)$rawPost->data->media_embed)) {
+			// regex so that the media isn't wider than 450px;
+			$widthRegulationRegex = "/width=\\\"([0-9]{1,5})\\\"/";
+			$mediaRegulated = preg_replace($widthRegulationRegex, 'width="535"', $rawPost->data->media_embed->content);
+			$post->media = ["content" => $mediaRegulated,
+				"type" => $rawPost->data->media->type];
+		}
+
+		$lolRedditPost[] = $post;
+	}
+
+	$GLOBALS['lolRedditPost'] = $lolRedditPost;
+
+		// ------ ! END REDDIT LOL SITE ! ------ //
 	
 	// /!\ END LOL NEWS RELATED /!\ // 
 
+	// -------------------------------------
+	// -------------------------------------
+
+	// /!\ PROGRAMMING NEWS RELATED /!\ //
+	
+		// ------ ! REDDIT PROGRAMMING SITE ! ------ //
+		
+	$redditProgramming = curl("https://www.reddit.com/r/programming/.json");
+
+	$jsonRedditProgramming = json_decode($redditProgramming);
+	$arrayProgrammingPost = $jsonRedditProgramming->data->children;
+	$arrayProgrammingPostSliced = array_slice($arrayProgrammingPost, 0, 10);
+
+	// array of final posts, the one i chose to keep, so the first 10.
+	$ProgrammingRedditPost = [];
+
+	foreach ($arrayProgrammingPostSliced as $rawPost) {
+		$post = new RedditPost();
+
+		$post->title = $rawPost->data->title;
+		$post->content = $rawPost->data->selftext;
+		$post->permalink = "https://www.reddit.com/".$rawPost->data->permalink;
+		$post->linkOfPost = $rawPost->data->url;
+		$post->author = $rawPost->data->author;
+		$post->authorText = $rawPost->data->author_flair_text;
+		$post->comments = $rawPost->data->num_comments;
+		$post->upvotes = $rawPost->data->ups;
+		if (!empty((array)$rawPost->data->media_embed)) {
+			// regex so that the media isn't wider than 450px;
+			$widthRegulationRegex = "/width=\\\"([0-9]{1,5})\\\"/";
+			$mediaRegulated = preg_replace($widthRegulationRegex, 'width="535"', $rawPost->data->media_embed->content);
+			$post->media = ["content" => $mediaRegulated,
+				"type" => $rawPost->data->media->type];
+		}
+
+		$programmingRedditPost[] = $post;
+	}
+
+	$GLOBALS['programmingRedditPost'] = $programmingRedditPost;
+
+		// ------ ! END REDDIT PROGRAMMING SITE ! ------ //
 
 
+	// /!\ END PROGRAMMING NEWS RELATED /!\ //
 
 
-
-
+	// /!\ AJAX REQUEST /!\ //
 
 	if (isset($_POST["csgo"]) && !empty($_POST["csgo"])) {
 		$fullString = '<div class="container-fluid csgo-related">
@@ -279,6 +359,112 @@
 		$fullString .= '</div></div></div></div>';
 		echo $fullString;
 	}
+
+
+
 	if (isset($_POST["lol"]) && !empty($_POST["lol"])) {
-		echo 'test AJAX SAMER';
+				// reddit string
+		$fullString = '<div class="container-fluid lol-related">';
+		$fullString .= '<div class="row">
+													<div class="col-lg-2 relative-container">
+														<div class="logo_reddit_lol"></div>
+													</div>
+												 	<div class="col-lg-8 no-padding-margin reddit_lol">
+														<div class="box-reddit">';
+		foreach ($lolRedditPost as $post) {
+			$redditLolString = '<div class="post_lol">';
+			$redditLolString .= '<a class="container-fluid link_lol_reddit" href="'.$post->permalink.'" target="blank">';
+			$redditLolString .= '<div class="row">';
+
+			$redditLolString .= '<div class="col-1">
+															<div class="reddit_upvotes">'.$post->upvotes.'</div>
+														</div>';
+
+			$redditLolString .= '<div class="col-11">';
+			$redditLolString .= '<div class="reddit_author">Posted By '.$post->author.'</div>';
+			$redditLolString .= '<div class="reddit_authorText">'.$post->authorText.'</div>';
+			$redditLolString .= '<div class="reddit_title">'.$post->title.'</div>';
+			$redditLolString .= '<div class="media reddit_media">';
+			if ($post->media) {
+				if ($post->media["type"] == "gfycat.com") {
+					$mediaString = '<div class="gif">';
+					$mediaString .= html_entity_decode($post->media["content"]);
+					$mediaString .= '</div>';
+				} else {
+					$mediaString = html_entity_decode($post->media["content"]);
+				}
+			} else {
+				$mediaString = '<img src="'.$post->linkOfPost.'" alt="">';
+			}
+			// end of media div
+			$redditLolString .= $mediaString.'</div>';
+			$redditLolString .= '<div class="reddit_comments">'.$post->comments.' comments</div>';
+
+			// end of col-11 div
+			$redditLolString .= '</div>';
+
+
+			// end of div row then a link then div post_lol
+			$redditLolString .= '</div></a></div>';
+			$fullString .= $redditLolString;
+		}
+		// end of box-reddit col-lg-8 row then container-fluid, the very first div.
+		$fullString .= '</div></div></div></div>';
+
+		echo $fullString;
 	}
+
+	if (isset($_POST["programming"]) && !empty($_POST["programming"])) {
+		// reddit string
+		$fullString = '<div class="container-fluid programming-related">';
+		$fullString .= '<div class="row">
+													<div class="col-lg-2 relative-container">
+														<div class="logo_reddit_programming"></div>
+													</div>
+												 	<div class="col-lg-8 no-padding-margin reddit_programming">
+														<div class="box-reddit">';
+		foreach ($programmingRedditPost as $post) {
+			$redditProgrammingString = '<div class="post_programming">';
+			$redditProgrammingString .= '<a class="container-fluid link_programming_reddit" href="'.$post->permalink.'" target="blank">';
+			$redditProgrammingString .= '<div class="row">';
+
+			$redditProgrammingString .= '<div class="col-1">
+															<div class="reddit_upvotes">'.$post->upvotes.'</div>
+														</div>';
+
+			$redditProgrammingString .= '<div class="col-11">';
+			$redditProgrammingString .= '<div class="reddit_author">Posted By '.$post->author.'</div>';
+			$redditProgrammingString .= '<div class="reddit_authorText">'.$post->authorText.'</div>';
+			$redditProgrammingString .= '<div class="reddit_title">'.$post->title.'</div>';
+			$redditProgrammingString .= '<div class="media reddit_media">';
+			if ($post->media) {
+				if ($post->media["type"] == "gfycat.com") {
+					$mediaString = '<div class="gif">';
+					$mediaString .= html_entity_decode($post->media["content"]);
+					$mediaString .= '</div>';
+				} else {
+					$mediaString = html_entity_decode($post->media["content"]);
+				}
+			} else {
+				$mediaString = '<img src="'.$post->linkOfPost.'" alt="">';
+			}
+			// end of media div
+			$redditProgrammingString .= $mediaString.'</div>';
+			$redditProgrammingString .= '<div class="reddit_comments">'.$post->comments.' comments</div>';
+
+			// end of col-11 div
+			$redditProgrammingString .= '</div>';
+
+
+			// end of div row then a link then div post_programming
+			$redditProgrammingString .= '</div></a></div>';
+			$fullString .= $redditProgrammingString;
+		}
+		// end of box-reddit col-lg-8 row then container-fluid, the very first div.
+		$fullString .= '</div></div></div></div>';
+
+		echo $fullString;
+	}
+
+
+	// /!\ END AJAX REQUEST /!\ //
